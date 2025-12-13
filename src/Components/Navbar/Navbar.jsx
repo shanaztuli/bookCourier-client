@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthContext";
 
 const Navbar = () => {
-//   const { user, logOut } = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -150,7 +150,7 @@ const Navbar = () => {
           />
         </div>
 
-        {/* {user && (
+        {user && (
           <img
             className="w-13 h-13 mr-2 rounded-full"
             src={user?.photoURL}
@@ -160,14 +160,20 @@ const Navbar = () => {
         )}
         {user ? (
           <>
-            <button onClick={handleLogOut} className="btn btn-primary">
+            <button
+              onClick={handleLogOut}
+              className="btn text-white bg-gradient-to-br from-red-800 via-red-900 to-red-950"
+            >
               {" "}
               Logout
             </button>
           </>
         ) : (
           <>
-            <Link to="/auth/login" className="btn btn-primary ">
+            <Link
+              to="/auth/login"
+              className="btn text-white bg-gradient-to-br from-red-800 via-red-900 to-red-950 "
+            >
               {" "}
               Login
             </Link>
@@ -179,19 +185,7 @@ const Navbar = () => {
               Register
             </Link>
           </>
-        )} */}
-
-        <Link
-          to="/auth/login"
-          className="btn text-white bg-gradient-to-br from-red-800 via-red-900 to-red-950 "
-        >
-          {" "}
-          Login
-        </Link>
-        <Link to="/auth/register" className="btn ml-2 bg-base-200 font-bold ">
-          {" "}
-          Register
-        </Link>
+        )}
       </div>
     </div>
   );

@@ -1,20 +1,21 @@
 import React from 'react';
 import { Outlet, useNavigation } from 'react-router';
-import Navbar from '../Components/Navbar/Navbar';
-import { ToastContainer } from "react-toastify";
-import LoadingSpinner from '../Components/LoadingSpinner';
 import Footer from '../Components/Footer/Footer';
-import { Toaster, } from "react-hot-toast";
+import Navbar from '../Components/Navbar/Navbar';
+import { ToastContainer } from 'react-toastify';
+import { Toaster } from "react-hot-toast";
 
-const RootLayout = () => {
-   const { state } = useNavigation;
+import LoadingSpinner from '../Components/LoadingSpinner';
+
+const AuthLayout = () => {
+  const { state } = useNavigation;
+
     return (
-      <div className="flex flex-col min-h-screen max-w-[1400px] mx-auto">
+      <div className="flex max-w-[1400px] mx-auto flex-col ">
         <header>
           <Navbar></Navbar>
         </header>
-        <section></section>
-        <main className="flex-1">
+        <main className="px-4 md:px-0 md:pb-8  md:flex-1 bg-base-200">
           {state == "loading" ? (
             <LoadingSpinner></LoadingSpinner>
           ) : (
@@ -26,8 +27,9 @@ const RootLayout = () => {
         </footer>
         <ToastContainer />
         <Toaster />
+        
       </div>
     );
 };
 
-export default RootLayout;
+export default AuthLayout;
