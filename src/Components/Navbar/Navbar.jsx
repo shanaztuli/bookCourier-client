@@ -33,12 +33,12 @@ const Navbar = () => {
       </li>
       <li className="ml-2 font-bold">
         <NavLink
-          to={"/books"}
+          to={"/allBooks"}
           className={({ isActive }) =>
             isActive ? "border-b-3 border-red-800 " : ""
           }
         >
-          Books
+          All-Books
         </NavLink>
       </li>
       <li className="ml-2 font-bold">

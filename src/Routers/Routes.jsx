@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import AuthLayout from "../Layouts/AuthLayout";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
+import AllBooks from "../Pages/AllBooks/AllBooks";
 
  export const router = createBrowserRouter([
    {
@@ -13,6 +14,10 @@ import Login from "../Pages/Login/Login";
        {
          index: true,
          Component: Home,
+       },
+       {
+         path:'/allBooks',
+         Component: AllBooks,
        },
      ],
    },
