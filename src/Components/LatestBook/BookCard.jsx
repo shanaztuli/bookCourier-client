@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const BookCard = ({ book }) => {
   const { title, author, image, price } = book;
 
@@ -13,9 +15,12 @@ const BookCard = ({ book }) => {
         <div className="flex items-center justify-between pt-2">
           <span className="text-red-800 font-bold">${price}</span>
 
-          <button className="px-4 py-1 text-sm rounded btn-primary hover:bg-red-900">
+          <Link
+            to={`/books/${book._id}`}
+            className="px-4 py-1 text-sm rounded btn-primary hover:bg-red-900"
+          >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

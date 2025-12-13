@@ -35,6 +35,9 @@
 .btn-primary {
   @apply  text-white bg-gradient-to-br from-red-800 via-red-900 to-red-950;
 }
+.btn-btn {
+  @apply  text-white bg-gradient-to-br from-red-800 via-red-900 to-red-950;
+}
 
 .text {
    @apply bg-gradient-to-r from-[#692e02] via-[#ad2b07] to-[#572203] 

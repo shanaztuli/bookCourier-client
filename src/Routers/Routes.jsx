@@ -5,6 +5,9 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import AllBooks from "../Pages/AllBooks/AllBooks";
+import BookDetails from "../Pages/BookDetails/BookDetails";
+import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../Components/ErrorPage";
 
  export const router = createBrowserRouter([
    {
@@ -18,6 +21,10 @@ import AllBooks from "../Pages/AllBooks/AllBooks";
        {
          path:'/allBooks',
          Component: AllBooks,
+       },
+       {
+         path:'/books/:id',
+         element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>
        },
      ],
    },
@@ -36,4 +43,8 @@ import AllBooks from "../Pages/AllBooks/AllBooks";
        },
      ],
    },
+   {
+    path:'*',
+    Component:ErrorPage
+   }
  ]);
