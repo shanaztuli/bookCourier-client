@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, NavLink } from "react-router";
+import { Link, Navigate, NavLink, useNavigate } from "react-router";
 import logo from "/logoImg.png";
 import { use } from "react";
 import { toast } from "react-toastify";
@@ -8,6 +8,8 @@ import { AuthContext } from "../../providers/AuthContext";
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -94,7 +96,7 @@ const Navbar = () => {
     logOut()
       .then(() => {
         toast("You signed out");
-        Navigate("/");
+        navigate("/");
       })
       .catch();
   };

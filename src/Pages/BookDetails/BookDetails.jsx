@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import OrderModal from "./OrderModal";
 import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner";
+import { toast } from "react-toastify";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -26,6 +27,45 @@ const BookDetails = () => {
  };
 
  if (!book) return <LoadingSpinner></LoadingSpinner>;
+
+
+//
+const handleAddWishlist = () => {
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+
+  const wishlistData = {
+    bookId: book._id,
+    bookTitle: book.title,
+    bookImage: book.image,
+    price: book.price,
+    userEmail: user.email,
+  };
+
+  fetch(`${import.meta.env.VITE_API_URL}/wishlist`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(wishlistData),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Already wishlisted");
+      return res.json();
+    })
+    .then(() => {
+      toast("Added to wishlist ❤️");
+    })
+    .catch((err) => {
+      toast("Already in wishlist");
+    });
+};
+
+
+
+
   return (
     <div className="max-w-5xl mx-auto p-6">
       <div className="grid md:grid-cols-2 gap-8">
@@ -39,9 +79,17 @@ const BookDetails = () => {
 
           <p className="text-2xl font-semibold mt-4">$ {book.price}</p>
 
-          <button onClick={handleOrderClick} className="btn btn-btn  mt-6">
-            Order Now
-          </button>
+          <div className="flex  flex-col gap-4">
+            <button onClick={handleOrderClick} className="btn btn-btn  mt-6">
+              Order Now
+            </button>
+            <button
+              onClick={handleAddWishlist}
+              className="btn btn-outline "
+            >
+              🤍 Add to Wishlist
+            </button>
+          </div>
         </div>
       </div>
 
