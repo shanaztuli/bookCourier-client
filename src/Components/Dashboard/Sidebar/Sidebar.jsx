@@ -25,8 +25,9 @@ const Sidebar = ({ open, setOpen }) => {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4 border-b">
-          <Link to='/' className="text-xl font-bold text-red-700">BookCourier</Link>
-        
+          <Link to="/" className="text-xl font-bold text-red-700">
+            BookCourier
+          </Link>
 
           {/* Close button (mobile only) */}
           <button className="md:hidden" onClick={() => setOpen(false)}>
@@ -68,12 +69,22 @@ const Sidebar = ({ open, setOpen }) => {
           >
             Invoices
           </NavLink>
+          <NavLink
+            to="/dashboard/add-book"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            Add-Books
+          </NavLink>
         </nav>
 
         {/* Logout fixed at bottom */}
         <div className="absolute bottom-0 left-0 w-full p-4 border-t">
-          <Link to='/' className=" w-full btn btn-outline mb-3">
-             Go back Home
+          <Link to="/" className=" w-full btn btn-outline mb-3">
+            Go back Home
           </Link>
           <button
             onClick={logOut}
