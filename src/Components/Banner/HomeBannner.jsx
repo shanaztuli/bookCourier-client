@@ -57,7 +57,7 @@ const HomeBanner = () => {
                 </h1>
                 <p className="max-w-xl text-lg mb-6">{slide.description}</p>
                 <Link
-                  to="/books"
+                  to="/allBooks"
                   className="inline-block btn-primary transition px-6 py-3 rounded-md font-semibold"
                 >
                   Browse All Books

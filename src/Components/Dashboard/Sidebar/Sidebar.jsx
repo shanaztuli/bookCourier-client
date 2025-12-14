@@ -1,49 +1,88 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
+import { AiOutlineClose } from "react-icons/ai";
 import useAuth from "../../../hooks/useAuth";
-import { AiOutlineBars } from "react-icons/ai";
-
-import useRole from "../../../hooks/useRole";
-import CustomerMenu from "../Menu/CustomerMenu";
-import LibrarianMenu from "../Menu/LibrarianMenu";
-import AdminMenu from "../Menu/AdminMenu";
-
-const Sidebar = () => {
+const Sidebar = ({ open, setOpen }) => {
   const { logOut } = useAuth();
-  const [isActive, setActive] = useState(false);
-  const { role } = useRole();
-
-  const handleToggle = () => setActive(!isActive);
 
   return (
     <>
-      {/* Small screen toggle */}
-      <div className="bg-gray-100 md:hidden flex justify-between p-4">
-        <Link to="/">BookCourier</Link>
-        <button onClick={handleToggle}>
-          <AiOutlineBars />
-        </button>
-      </div>
+      {/* Overlay for mobile */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
-      <div
-        className={`fixed md:relative top-0 left-0 h-full w-64 bg-white shadow-md transform ${
-          isActive ? "-translate-x-full" : "translate-x-0"
-        } transition-transform`}
+      <aside
+        className={`
+          fixed md:fixed top-0 left-0 z-50 h-screen w-64 bg-white shadow-lg
+          transform transition-transform duration-300
+          ${open ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0
+        `}
       >
-        <div className="p-4 font-bold text-xl text-center">BookCourier</div>
-        <nav className="mt-6">
-          {role === "customer" && <CustomerMenu />}
-          {role === "librarian" && <LibrarianMenu />}
-          {role === "admin" && <AdminMenu />}
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-4 border-b">
+          <Link to='/' className="text-xl font-bold text-red-700">BookCourier</Link>
+        
+
+          {/* Close button (mobile only) */}
+          <button className="md:hidden" onClick={() => setOpen(false)}>
+            <AiOutlineClose size={20} />
+          </button>
+        </div>
+
+        {/* Menu */}
+        <nav className="flex flex-col px-4 py-6 gap-2">
+          <NavLink
+            to="/dashboard/my-orders"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            My Orders
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/profile"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            My Profile
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/invoices"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            Invoices
+          </NavLink>
         </nav>
-        <button
-          onClick={logOut}
-          className="absolute bottom-4 w-full py-2 bg-red-500 text-white"
-        >
-          Logout
-        </button>
-      </div>
+
+        {/* Logout fixed at bottom */}
+        <div className="absolute bottom-0 left-0 w-full p-4 border-t">
+          <Link to='/' className=" w-full btn btn-outline mb-3">
+             Go back Home
+          </Link>
+          <button
+            onClick={logOut}
+            className="w-full btn-btn text-white py-2 rounded"
+          >
+            Logout
+          </button>
+        </div>
+      </aside>
     </>
   );
 };

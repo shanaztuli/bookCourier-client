@@ -1,22 +1,30 @@
-import React from "react";
 import { Outlet } from "react-router";
-import Sidebar from "../Components/Dashboard/Sidebar/SideBar";
-import useRole from "../hooks/useRole";
-import LoadingSpinner from "../Components/LoadingSpinner";
+import { useState } from "react";
 
+import { AiOutlineMenu } from "react-icons/ai";
+import Sidebar from "../Components/Dashboard/Sidebar/SideBar";
 
 const DashboardLayout = () => {
-  const [role, isRoleLoading] = useRole();
-if (isRoleLoading) return <LoadingSpinner />;
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      {/* Sidebar */}
-      <Sidebar role={role} />
+    <div className=" max-w-[1400px] mx-auto flex bg-gray-100 min-h-screen">
+      {/* Sidebar (always visible on md+) */}
+      <Sidebar open={open} setOpen={setOpen} />
 
-      {/* Main content */}
-      <div className="flex-1 p-6 md:ml-64">
-        <Outlet />
+      {/* Content area */}
+      <div className="flex-1 md:ml-64">
+        {/* Top bar (mobile only) */}
+        <div className="md:hidden bg-white shadow px-4 py-3 flex items-center">
+          <button onClick={() => setOpen(true)}>
+            <AiOutlineMenu size={24} />
+          </button>
+          <h2 className="ml-4 font-semibold text-lg">Dashboard</h2>
+        </div>
+
+        <main className="p-4 md:p-6">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

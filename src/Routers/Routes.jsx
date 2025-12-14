@@ -18,6 +18,9 @@ import Orders from "../Pages/Librarian/Orders";
 import AllUsers from "../Pages/Admin/AllUsers";
 import ManageBooks from "../Pages/Admin/ManageBooks";
 import AdminProfile from "../Pages/Admin/AdminProfile";
+import DashboardRedirect from "../Pages/Dashboard/DashboardRedirect";
+import PaymentSuccess from "../Pages/payment/PaymentSuccess";
+import PaymentCanceled from "../Pages/payment/PaymentCanceled";
 
  export const router = createBrowserRouter([
    {
@@ -50,7 +53,11 @@ import AdminProfile from "../Pages/Admin/AdminProfile";
        </PrivateRoute>
      ),
      children: [
+       { index: true, element: <DashboardRedirect /> },
        { path: "my-orders", element: <MyOrders /> },
+
+       { path: "payment-success", element: <PaymentSuccess/> },
+       { path: "payment-cancelled", element: <PaymentCanceled /> },
        { path: "profile", element: <Profile /> },
        { path: "invoices", element: <Invoices /> },
 
