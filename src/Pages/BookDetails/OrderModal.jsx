@@ -15,6 +15,7 @@ const OrderModal = ({ book, closeModal }) => {
 
       name: user.displayName,
       email: user.email,
+      librarianEmail: book.librarianEmail,
 
       phone: form.phone.value,
       address: form.address.value,
