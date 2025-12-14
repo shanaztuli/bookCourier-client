@@ -8,14 +8,14 @@ const DashboardLayout = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className=" max-w-[1400px] mx-auto flex bg-gray-100 min-h-screen">
+    <div className=" max-w-[1400px] mx-auto flex min-h-screen">
       {/* Sidebar (always visible on md+) */}
       <Sidebar open={open} setOpen={setOpen} />
 
       {/* Content area */}
       <div className="flex-1 md:ml-64">
         {/* Top bar (mobile only) */}
-        <div className="md:hidden bg-white shadow px-4 py-3 flex items-center">
+        <div className="md:hidden  shadow px-4 py-3 flex items-center">
           <button onClick={() => setOpen(true)}>
             <AiOutlineMenu size={24} />
           </button>
