@@ -97,7 +97,37 @@ const Sidebar = ({ open, setOpen }) => {
               }`
             }
           >
-           Liberian orders
+            Liberian orders
+          </NavLink>
+          <NavLink
+            to="/dashboard/all-users"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            All-Users
+          </NavLink>
+          <NavLink
+            to="/dashboard/manage-books"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            Manage-Books
+          </NavLink>
+          <NavLink
+            to="/dashboard/admin-profile"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded ${
+                isActive ? "bg-red-100 text-red-700" : "hover:bg-gray-100"
+              }`
+            }
+          >
+            Admin-profile
           </NavLink>
         </nav>
 
