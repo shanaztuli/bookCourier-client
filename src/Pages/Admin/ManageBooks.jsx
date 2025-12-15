@@ -13,7 +13,6 @@ const ManageBooks = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // Change book status (publish/unpublish)
   const handleStatusChange = (bookId, newStatus) => {
     fetch(`${import.meta.env.VITE_API_URL}/admin/books/${bookId}/status`, {
       method: "PATCH",
@@ -32,7 +31,6 @@ const ManageBooks = () => {
       .catch(() => toast.error("Failed to update status"));
   };
 
-  // Delete book (and associated orders)
   const handleDelete = (bookId) => {
     if (!confirm("Are you sure you want to delete this book and its orders?"))
       return;

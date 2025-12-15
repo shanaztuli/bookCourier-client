@@ -25,13 +25,12 @@ const MyProfile = () => {
   const name = form.name.value;
   const image = form.image.value;
 
-  // 1️⃣ Update MongoDB
+  // 1️ Update MongoDB
   await axiosSecure.patch(`/users/profile/${user.email}`, {
     name,
     image,
   });
 
-  // 2️⃣ Update Firebase Auth (THIS WAS MISSING)
   await updateProfile(auth.currentUser, {
     displayName: name,
     photoURL: image,

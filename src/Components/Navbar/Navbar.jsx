@@ -53,34 +53,7 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
-      {/* {user && (
-        <>
-          <li className="ml-2 font-bold">
-            <NavLink
-              to={"/myAcceptedTasks"}
-              className={({ isActive }) =>
-                isActive
-                 ? "border-b-3 border-red-800 "
-              : ""
-              }
-            >
-              My Accepted Tasks
-            </NavLink>
-          </li>
-          <li className="ml-2 md:ml-5 font-bold">
-            <NavLink
-              to={"/myAddedJobs"}
-              className={({ isActive }) =>
-                isActive
-                  ? "border-b-3 border-red-800 "
-              : ""
-              }
-            >
-              My Added Jobs
-            </NavLink>
-          </li>
-        </>
-      )} */}
+    
 
       <div className=" md:hidden block ml-4">
         <input

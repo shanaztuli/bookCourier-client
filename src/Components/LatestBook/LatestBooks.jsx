@@ -20,6 +20,7 @@ const LatestBooks = () => {
   }, []);
 
   if (loading) {
+
     return (
       <div className="text-center py-20">
         <span className="loading loading-spinner loading-lg text-red-800"></span>

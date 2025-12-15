@@ -1,11 +1,13 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 import { useState } from "react";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import Sidebar from "../Components/Dashboard/Sidebar/SideBar";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const DashboardLayout = () => {
   const [open, setOpen] = useState(false);
+   const { state } = useNavigation;
 
   return (
     <div className=" max-w-[1400px] mx-auto flex min-h-screen">
@@ -23,7 +25,11 @@ const DashboardLayout = () => {
         </div>
 
         <main className="p-4 md:p-6">
-          <Outlet />
+          {state == "loading" ? (
+            <LoadingSpinner></LoadingSpinner>
+          ) : (
+            <Outlet></Outlet>
+          )}
         </main>
       </div>
     </div>

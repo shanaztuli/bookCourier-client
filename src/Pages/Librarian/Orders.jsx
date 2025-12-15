@@ -20,7 +20,7 @@ const Orders = () => {
     fetchOrders();
   }, [user?.email, axiosSecure]);
 
-  // 🔁 Change status
+  //  Change status
   const handleStatusChange = async (id, status) => {
     await axiosSecure.patch(`/orders/status/${id}`, { status });
 

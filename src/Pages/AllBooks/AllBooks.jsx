@@ -30,11 +30,9 @@ const AllBooks = () => {
   return (
     <section className="py-16 min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
         <div className="mb-10 flex flex-col md:flex-row gap-4 justify-between">
           <h2 className="text-3xl font-bold">All Books</h2>
 
-          {/* Search + Sort */}
           <div className="flex gap-4">
             <input
               type="text"

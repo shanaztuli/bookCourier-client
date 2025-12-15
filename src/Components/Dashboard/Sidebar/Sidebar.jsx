@@ -1,12 +1,13 @@
 import { Link, NavLink } from "react-router";
 import { AiOutlineClose } from "react-icons/ai";
 import useAuth from "../../../hooks/useAuth";
+import useRole from "../../../hooks/useRole";
 const Sidebar = ({ open, setOpen }) => {
   const { logOut } = useAuth();
+const [role, isRoleLoading] = useRole();
 
   return (
     <>
-      {/* Overlay for mobile */}
       {open && (
         <div
           className="fixed inset-0 bg-black/40 z-40 md:hidden"
@@ -29,7 +30,6 @@ const Sidebar = ({ open, setOpen }) => {
             BookCourier
           </Link>
 
-          {/* Close button (mobile only) */}
           <button className="md:hidden" onClick={() => setOpen(false)}>
             <AiOutlineClose size={20} />
           </button>
@@ -131,7 +131,6 @@ const Sidebar = ({ open, setOpen }) => {
           </NavLink>
         </nav>
 
-        {/* Logout fixed at bottom */}
         <div className="absolute bottom-0 left-0 w-full p-4 border-t">
           <Link to="/" className=" w-full btn btn-outline mb-3">
             Go back Home
