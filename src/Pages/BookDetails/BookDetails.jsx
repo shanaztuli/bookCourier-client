@@ -4,6 +4,8 @@ import OrderModal from "./OrderModal";
 import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import { toast } from "react-toastify";
+import BookReviews from "./BookReviews";
+import AddReview from "./AddReview";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -83,14 +85,16 @@ const handleAddWishlist = () => {
             <button onClick={handleOrderClick} className="btn btn-btn  mt-6">
               Order Now
             </button>
-            <button
-              onClick={handleAddWishlist}
-              className="btn btn-outline "
-            >
+            <button onClick={handleAddWishlist} className="btn btn-outline ">
               🤍 Add to Wishlist
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="mt-12">
+        <BookReviews bookId={book._id} />
+        <AddReview bookId={book._id} />
       </div>
 
       {openModal && (

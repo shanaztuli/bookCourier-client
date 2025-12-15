@@ -4,7 +4,10 @@ const BookCard = ({ book }) => {
   const { title, author, image, price } = book;
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+    <Link
+      to={`/books/${book._id}`}
+      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
+    >
       <img src={image} alt={title} className="h-56 w-full object-cover" />
 
       <div className="p-4 space-y-2">
@@ -23,7 +26,7 @@ const BookCard = ({ book }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

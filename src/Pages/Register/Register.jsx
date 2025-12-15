@@ -136,11 +136,20 @@ const Register = () => {
               type="password"
               {...register("password", {
                 required: "Password is required",
-                minLength: { value: 6, message: "Min 6 characters" },
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/,
+                  message:
+                    "Password must include 1 uppercase, 1 lowercase, and 1 special character",
+                },
               })}
               placeholder="Your Password"
-              className="w-full  border p-3 rounded-md focus:ring-2 focus:ring-indigo-500"
+              className="w-full border p-3 rounded-md focus:ring-2 focus:ring-indigo-500"
             />
+
             {errors.password && (
               <p className="text-xs text-red-500">{errors.password.message}</p>
             )}

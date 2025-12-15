@@ -21,6 +21,9 @@ import AdminProfile from "../Pages/Admin/AdminProfile";
 import DashboardRedirect from "../Pages/Dashboard/DashboardRedirect";
 import PaymentSuccess from "../Pages/payment/PaymentSuccess";
 import PaymentCanceled from "../Pages/payment/PaymentCanceled";
+import AdminRoute from "./AdminRoute";
+import LibrarianRoute from "./LibrarianRoute";
+import MyWishlist from "../Pages/User/MyWishlist";
 
  export const router = createBrowserRouter([
    {
@@ -56,19 +59,63 @@ import PaymentCanceled from "../Pages/payment/PaymentCanceled";
        { index: true, element: <DashboardRedirect /> },
        { path: "my-orders", element: <MyOrders /> },
 
-       { path: "payment-success", element: <PaymentSuccess/> },
+       { path: "payment-success", element: <PaymentSuccess /> },
        { path: "payment-cancelled", element: <PaymentCanceled /> },
        { path: "profile", element: <Profile /> },
        { path: "invoices", element: <Invoices /> },
+       { path: "myWishlist", element: <MyWishlist /> },
 
-       { path: "add-book", element: <AddBook /> },
-       { path: "my-books", element: <MyBook /> },
-       { path: "orders", element: <Orders /> },
+       {
+         path: "add-book",
+         element: (
+           <LibrarianRoute>
+             <AddBook />
+           </LibrarianRoute>
+         ),
+       },
+       {
+         path: "my-books",
+         element: (
+           <LibrarianRoute>
+             <MyBook />
+           </LibrarianRoute>
+         ),
+       },
+       {
+         path: "orders",
+         element: (
+           <LibrarianRoute>
+             {" "}
+             <Orders />
+           </LibrarianRoute>
+         ),
+       },
 
        // Admin routes
-       { path: "all-users", element: <AllUsers /> },
-       { path: "manage-books", element: <ManageBooks /> },
-       { path: "admin-profile", element: <AdminProfile /> },
+       {
+         path: "all-users",
+         element: (
+           <AdminRoute>
+             <AllUsers />
+           </AdminRoute>
+         ),
+       },
+       {
+         path: "manage-books",
+         element: (
+           <AdminRoute>
+             <ManageBooks />
+           </AdminRoute>
+         ),
+       },
+       {
+         path: "admin-profile",
+         element: (
+           <AdminRoute>
+             <AdminProfile />
+           </AdminRoute>
+         ),
+       },
      ],
    },
    {
