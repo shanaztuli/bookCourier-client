@@ -1,17 +1,47 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import UserRow from "./UserRow";
+import { auth } from "../../firebase/firebase.config";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
 
   // Fetch all users
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/admin/users`)
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${import.meta.env.VITE_API_URL}/admin/users`)
+  //     .then((res) => res.json())
+  //     .then((data) => setUsers(data))
+  //     .catch((err) => console.error(err));
+  // }, []);
+//
+useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      const token = await auth.currentUser.getIdToken();
+
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      // 🛡️ SAFETY CHECK
+      if (Array.isArray(data)) {
+        setUsers(data);
+      } else {
+        setUsers([]);
+        console.error("Not array:", data);
+      }
+    } catch (err) {
+      console.error(err);
+      setUsers([]);
+    }
+  };
+
+  fetchUsers();
+}, []);
 
   // Update role handler
   const handleRoleChange = (userId, newRole) => {

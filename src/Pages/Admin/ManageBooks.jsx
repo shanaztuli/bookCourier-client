@@ -1,17 +1,47 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import BookRow from "./BookRow";
+import { auth } from "../../firebase/firebase.config";
 
 const ManageBooks = () => {
   const [books, setBooks] = useState([]);
 
   // Fetch all books added by librarians
+  // useEffect(() => {
+  //   fetch(`${import.meta.env.VITE_API_URL}/admin/books`)
+  //     .then((res) => res.json())
+  //     .then((data) => setBooks(data))
+  //     .catch((err) => console.error(err));
+  // }, []);
+  //
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/admin/books`)
-      .then((res) => res.json())
-      .then((data) => setBooks(data))
-      .catch((err) => console.error(err));
+    const fetchBooks = async () => {
+      try {
+        const token = await auth.currentUser.getIdToken();
+
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/books`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
+          setBooks(data);
+        } else {
+          console.error("Not array:", data);
+          setBooks([]);
+        }
+      } catch (err) {
+        console.error(err);
+        setBooks([]);
+      }
+    };
+
+    fetchBooks();
   }, []);
+
 
   const handleStatusChange = (bookId, newStatus) => {
     fetch(`${import.meta.env.VITE_API_URL}/admin/books/${bookId}/status`, {
