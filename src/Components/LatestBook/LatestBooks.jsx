@@ -8,7 +8,7 @@ const LatestBooks = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/books/latest")
+      .get("https://book-courier-server-eight.vercel.app//books/latest")
       .then((res) => {
         setBooks(res.data);
         setLoading(false);
