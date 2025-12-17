@@ -27,7 +27,7 @@ useEffect(() => {
 
       const data = await res.json();
 
-      // 🛡️ SAFETY CHECK
+     
       if (Array.isArray(data)) {
         setUsers(data);
       } else {
