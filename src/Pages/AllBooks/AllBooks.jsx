@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "../../Components/LatestBook/BookCard";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../../Components/LoadingSpinner";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+ const { loading } = useAuth();
 
   // 
   useEffect(() => {
@@ -26,6 +29,9 @@ const AllBooks = () => {
     if (sort === "high") return b.price - a.price;
     return 0;
   });
+  if(loading){
+    return <LoadingSpinner></LoadingSpinner>
+  }
 
   return (
     <section className="py-16 min-h-screen">

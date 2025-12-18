@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "./BookCard";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../LoadingSpinner";
 
 const LatestBooks = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const [loadings, setLoadings] = useState(true);
+const { loading } = useAuth();
   useEffect(() => {
     axios
       .get("https://book-courier-server-eight.vercel.app/books/latest")
       .then((res) => {
         setBooks(res.data);
-        setLoading(false);
+        setLoadings(false);
       })
       .catch((err) => {
         console.error(err);
-        setLoading(false);
+        setLoadings(false);
       });
   }, []);
+if(loading){
+  return <LoadingSpinner></LoadingSpinner>
+}
+  if (loadings) {
 
-  if (loading) {
-
-    return (
-      <div className="text-center py-20">
-        <span className="loading loading-spinner loading-lg text-red-800"></span>
-      </div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   return (
