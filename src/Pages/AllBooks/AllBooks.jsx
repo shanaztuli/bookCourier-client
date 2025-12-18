@@ -8,15 +8,26 @@ const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [booksLoading, setBooksLoading] = useState(true);
+
  const { loading } = useAuth();
 
   // 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/books`)
-      .then((res) => setBooks(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+useEffect(() => {
+  axios
+    .get(`${import.meta.env.VITE_API_URL}/books`)
+    .then((res) => {
+      setBooks(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setBooksLoading(false);
+    });
+}, []);
+
+
 
   // SEARCH
   const filteredBooks = books.filter((book) =>
@@ -29,8 +40,10 @@ const AllBooks = () => {
     if (sort === "high") return b.price - a.price;
     return 0;
   });
-  if(loading){
-    return <LoadingSpinner></LoadingSpinner>
+ 
+
+  if (loading || booksLoading) {
+    return <LoadingSpinner />;
   }
 
   return (
@@ -60,15 +73,13 @@ const AllBooks = () => {
           </div>
         </div>
 
-       
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {sortedBooks.map((book) => (
             <BookCard key={book._id} book={book} />
           ))}
         </div>
 
-      
-        {sortedBooks.length === 0 && (
+        {!booksLoading && sortedBooks.length === 0 && (
           <p className="text-center text-gray-500 mt-10">No books found.</p>
         )}
       </div>
